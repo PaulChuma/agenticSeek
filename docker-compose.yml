@@ -1,4 +1,3 @@
-version: '3'
 
 services:
   redis:
@@ -34,7 +33,6 @@ services:
       - ./searxng:/etc/searxng:rw,z
     environment:
       - SEARXNG_BASE_URL=${SEARXNG_BASE_URL:-http://localhost:8080/}
-      - SEARXNG_SECRET_KEY=${SEARXNG_SECRET_KEY}
       - UWSGI_WORKERS=4
       - UWSGI_THREADS=4
     cap_add:
@@ -76,6 +74,7 @@ services:
       context: .
       dockerfile: Dockerfile.backend
     ports:
+      - "7777:7777"
       - ${BACKEND_PORT:-7777}:${BACKEND_PORT:-7777}
       - ${OLLAMA_PORT:-11434}:${OLLAMA_PORT:-11434}
       - ${LM_STUDIO_PORT:-1234}:${LM_STUDIO_PORT:-1234}
@@ -90,14 +89,6 @@ services:
       - WORK_DIR=/opt/workspace
       - BACKEND_PORT=${BACKEND_PORT}
       - DOCKER_INTERNAL_URL=http://host.docker.internal
-      - OPENAI_API_KEY=${OPENAI_API_KEY}
-      - DEEPSEEK_API_KEY=${DEEPSEEK_API_KEY}
-      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
-      - TOGETHER_API_KEY=${TOGETHER_API_KEY}
-      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
-      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
-      - HUGGINGFACE_API_KEY=${HUGGINGFACE_API_KEY}
-      - DSK_DEEPSEEK_API_KEY=${DSK_DEEPSEEK_API_KEY}
     networks:
       - agentic-seek-net
     extra_hosts:

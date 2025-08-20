@@ -40,22 +40,9 @@ class LanguageUtility:
 
     def translate(self, text: str, origin_lang: str) -> str:
         """
-        Translate the given text to English
-        Args:
-            text: string to translate
-            origin_lang: ISO language code
-        Returns: translated str
+        Translation disabled: always return original text.
         """
-        if origin_lang == "en":
-            return text
-        if origin_lang not in self.translators_tokenizer:
-            pretty_print(f"Language {origin_lang} not supported for translation", color="error")
-            return text
-        tokenizer = self.translators_tokenizer[origin_lang]
-        inputs = tokenizer(text, return_tensors="pt", padding=True)
-        model = self.translators_model[origin_lang]
-        translation = model.generate(**inputs)
-        return tokenizer.decode(translation[0], skip_special_tokens=True)
+        return text
 
     def analyze(self, text):
         """

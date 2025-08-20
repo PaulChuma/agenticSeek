@@ -300,12 +300,19 @@ function App() {
               </p>
             )}
             <form onSubmit={handleSubmit} className="input-form">
-              <input
-                type="text"
+              <textarea
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Type your query..."
                 disabled={isLoading}
+                rows={3}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    handleSubmit(e);
+                  }
+                }}
+                style={{ resize: 'vertical', width: '100%' }}
               />
               <div className="action-buttons">
                 <button

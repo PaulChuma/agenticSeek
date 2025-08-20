@@ -2484,7 +2484,7 @@ engines:
   - name: yummly
     engine: yummly
     shortcut: yum
-    disabled: true
+    disabled: false
 
   - name: brave
     engine: brave
